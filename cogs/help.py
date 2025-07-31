@@ -1,7 +1,7 @@
 from discord import app_commands, Embed, Color, Interaction
 from discord.ext import commands
 
-from utils import user_has_role
+from utils.utils import user_has_role
 
 
 class Help(commands.Cog):

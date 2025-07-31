@@ -7,8 +7,8 @@ from discord.ext import tasks, commands
 from discord.ui import View, Button, Modal, TextInput
 
 from cogs.notifying import build_schedule_embed
-from config_utils import *
-from utils import get_timezone_from_string, get_time_until_next_standup
+from utils.config_utils import *
+from utils.utils import get_timezone_from_string, get_time_until_next_standup
 
 align_running = False
 

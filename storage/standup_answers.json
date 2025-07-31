@@ -1,10 +1,10 @@
 {
   "2025-07-14": {
-    "553190226311249921": {
+    "842109348234098123": {
       "answers": {
-        "q0": "j",
-        "q1": "e",
-        "q2": "z"
+        "q0": "Fixed a bug in the ticket system",
+        "q1": "Worked on standup summary output",
+        "q2": "Feeling productive"
       },
       "questions_snapshot": {
         "q0": "What did you do today?",
@@ -14,11 +14,11 @@
     }
   },
   "2025-07-15": {
-    "553190226311249921": {
+    "842109348234098123": {
       "answers": {
-        "q0": "15",
-        "q1": "k",
-        "q2": "k"
+        "q0": "Added role-based command restrictions",
+        "q1": "Refactored the ticket handler",
+        "q2": "Feeling great!"
       },
       "questions_snapshot": {
         "q0": "What did you do today?",
@@ -28,11 +28,11 @@
     }
   },
   "2025-07-16": {
-    "553190226311249922": {
+    "832948230948230942": {
       "answers": {
-        "q0": "j",
-        "q1": "e",
-        "q2": "z"
+        "q0": "Tested ticket assignment flow",
+        "q1": "Created dummy ticket data",
+        "q2": "Feeling okay"
       },
       "questions_snapshot": {
         "q0": "What did you do today?",
@@ -40,47 +40,11 @@
         "q2": "How are you feeling?"
       }
     },
-    "553190226311249923": {
+    "832948230948230943": {
       "answers": {
-        "q0": "j",
-        "q1": "e",
-        "q2": "z"
-      },
-      "questions_snapshot": {
-        "q0": "What did you do today?",
-        "q1": "What did you do yesterday?",
-        "q2": "How are you feeling?"
-      }
-    },
-    "553190226311249924": {
-      "answers": {
-        "q0": "j",
-        "q1": "e",
-        "q2": "z"
-      },
-      "questions_snapshot": {
-        "q0": "What did you do today?",
-        "q1": "What did you do yesterday?",
-        "q2": "How are you feeling?"
-      }
-    },
-    "553190226311249925": {
-      "answers": {
-        "q0": "j",
-        "q1": "e",
-        "q2": "z"
-      },
-      "questions_snapshot": {
-        "q0": "What did you do today?",
-        "q1": "What did you do yesterday?",
-        "q2": "How are you feeling?"
-      }
-    },
-    "553190226311249926": {
-      "answers": {
-        "q0": "j",
-        "q1": "e",
-        "q2": "z"
+        "q0": "Reviewed PRs from team",
+        "q1": "Helped debug role mismatch issue",
+        "q2": "Feeling focused"
       },
       "questions_snapshot": {
         "q0": "What did you do today?",
@@ -88,6 +52,5 @@
         "q2": "How are you feeling?"
       }
     }
-
   }
 }

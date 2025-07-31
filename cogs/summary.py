@@ -6,7 +6,7 @@ from discord import Embed, app_commands
 from discord.ext import commands
 from discord.ui import View, Button
 
-from utils import user_has_role
+from utils.utils import user_has_role
 
 
 class StandupPaginator(View):

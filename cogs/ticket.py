@@ -6,8 +6,8 @@ import discord
 from discord import app_commands, Interaction, Embed, ui
 from discord.ext.commands import Cog
 
-from config_utils import load_config, save_config_changes
-from utils import user_has_role, get_timezone_from_string
+from utils.config_utils import load_config, save_config_changes
+from utils.utils import user_has_role, get_timezone_from_string
 
 cfg = load_config()
 OPEN_TICKETS_FILE = 'open_tickets.json'

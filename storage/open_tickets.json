@@ -1,22 +1,22 @@
 {
   "tickets": [
     {
-      "id": "2025-0725001007",
-      "title": "5555",
-      "description": "5555",
-      "created_at": "2025-07-25T00:10:07.209996+03:00",
-      "created_by": 553190226311249921,
+      "id": "2025-0731004399",
+      "title": "Bot crashes on /assign",
+      "description": "Using /assign causes the bot to crash with a traceback.",
+      "created_at": "2025-07-31T00:43:99.000000+03:00",
+      "created_by": 842109348234098123,
       "status": "Assigned/In Progress",
-      "priority": 5,
-      "category": "5555",
+      "priority": 2,
+      "category": "Bug",
       "assigned_to": [
-        689465872808542218
+        902384720349823470
       ],
       "assigned_role": [],
-      "thread_id": 1398049717400768572,
+      "thread_id": 1138452093845098234,
       "updates": [],
-      "mod_message_id": 1398049632570966016,
-      "mod_channel_id": 1396485118524133446
+      "mod_message_id": 1138452093845098123,
+      "mod_channel_id": 908234509283450982
     }
   ]
 }

@@ -4,8 +4,8 @@ import discord
 from discord import app_commands, Interaction, Embed
 from discord.ext.commands import Cog
 
-from config_utils import load_config
-from utils import get_timezone_from_string, get_time_until_next_standup, user_has_role
+from utils.config_utils import load_config
+from utils.utils import get_timezone_from_string, get_time_until_next_standup, user_has_role
 
 cfg = load_config()
 

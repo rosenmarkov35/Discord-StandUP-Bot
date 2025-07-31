@@ -4,8 +4,8 @@ from discord.ext import commands
 from discord.ui import Modal, TextInput, View, Button
 
 from cogs.standupconfig import validate_and_handle_toggle
-from utils import user_has_role
-from config_utils import *
+from utils.utils import user_has_role
+from utils.config_utils import *
 
 cfg = load_config()
 
