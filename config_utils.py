@@ -1,7 +1,7 @@
 # config_utils.py
 import json
 
-CONFIG_FILE = "standup_profile.json"
+CONFIG_FILE = "storage/standup_profile.json"
 _cfg_cache = None  # Use an internal cache for performance and consistency
 
 
