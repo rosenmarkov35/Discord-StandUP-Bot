@@ -1,0 +1,22 @@
+{
+  "tickets": [
+    {
+      "id": "2025-0725001007",
+      "title": "5555",
+      "description": "5555",
+      "created_at": "2025-07-25T00:10:07.209996+03:00",
+      "created_by": 553190226311249921,
+      "status": "Assigned/In Progress",
+      "priority": 5,
+      "category": "5555",
+      "assigned_to": [
+        689465872808542218
+      ],
+      "assigned_role": [],
+      "thread_id": 1398049717400768572,
+      "updates": [],
+      "mod_message_id": 1398049632570966016,
+      "mod_channel_id": 1396485118524133446
+    }
+  ]
+}

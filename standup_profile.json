@@ -1,0 +1,28 @@
+{
+  "toggled": true,
+  "standup_time": [
+    1,
+    50,
+    "01:50"
+  ],
+  "timezone": "UTC+3",
+  "standup_days": [
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+    "sunday"
+  ],
+  "standup_channel_id": 926522196904534018,
+  "standup_role_id": 1390681162984325191,
+  "standup_title": "Daily Standup",
+  "standup_desc": "Please fill out the questions below. \ud83d\udc7d",
+  "standup_questions": [
+    "What did you do today?",
+    "What did you do yesterday?",
+    "How are you feeling?"
+  ],
+  "tickets_channel_id": 1396509699708424413
+}
