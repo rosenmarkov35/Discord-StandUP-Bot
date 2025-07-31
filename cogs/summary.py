@@ -103,7 +103,7 @@ class Summary(commands.Cog):
         self.bot = bot
 
     @app_commands.command(name="summary", description="Show standup summaries for a date or last N days")
-    @app_commands.describe(input="Enter a date (dd-mm-yyyy) or number of days (e.g. 3)")
+    @app_commands.describe(input="Enter a date (yyyy-mm-dd) or number of days (e.g. 3)")
     async def summary(self, interaction: discord.Interaction, input: str = None):
         if not await user_has_role(interaction, "StandupMod"):
             await interaction.response.send_message(
@@ -112,7 +112,7 @@ class Summary(commands.Cog):
             return
 
         try:
-            with open("standup_answers.json", "r", encoding="utf-8") as f:
+            with open("storage/standup_answers.json", "r", encoding="utf-8") as f:
                 data = json.load(f)
         except (FileNotFoundError, json.JSONDecodeError):
             await interaction.response.send_message("No standup answers found.", ephemeral=True)
@@ -136,7 +136,7 @@ class Summary(commands.Cog):
                     selected_dates = all_dates[-num_entries:]
                 except ValueError:
                     await interaction.response.send_message(
-                        "⚠ Please provide a valid date (dd-mm-yyyy) or a number (1–14).",
+                        "⚠ Please provide a valid date (yyyy-mm-dd) or a number (1–14).",
                         ephemeral=True,
                     )
                     return

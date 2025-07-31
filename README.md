@@ -154,6 +154,7 @@ Railway supports free, always-on deployments with an intuitive interface.
 ---
 
 ## 🎮 Commands Overview
+#### Examples of the commands in action are shown below.
 
 ### 🌟 Standup Commands
 
@@ -163,6 +164,12 @@ Railway supports free, always-on deployments with an intuitive interface.
 /config        Display current standup configuration  
 /summary       View recorded standup responses  
 ```
+
+--- 
+
+![img.png](img.png)
+![img_1.png](img_1.png)
+![img_2.png](img_2.png)
 
 ### 🕒 Schedule Setup
 
@@ -183,8 +190,9 @@ Railway supports free, always-on deployments with an intuitive interface.
 
 ```
 /announce      Manually announce the next standup  
-```
 
+```
+![img_3.png](img_3.png)
 ### 📝 Content Configuration
 
 Use the `✏️ Edit Content` button in `/preview` to set:
