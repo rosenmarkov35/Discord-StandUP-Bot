@@ -1,3 +1,13 @@
+# ⚠️ Disclaimer
+
+This repository is a public showcase of the project structure and non-sensitive code.
+
+The production version of this bot is **obfuscated using PyArmor** to protect critical logic and enforce licensing. This public version is intended for demonstration and portfolio purposes only.
+
+Unauthorized use or redistribution of obfuscated builds without permission is prohibited.
+
+---
+
 # 🛠️ StandUP Bot
 
 **StandUP** is a powerful Discord bot designed to streamline team check-ins and ticket management within your server. With scheduled standups, role-based access, and a flexible ticketing system, it helps teams stay organized and accountable.
@@ -129,7 +139,7 @@ Add any other variables if used.
 ### Run the Bot
 
 ```bash
-python bot.py
+python bot1.py
 ```
 
 ---
@@ -146,7 +156,7 @@ You can deploy the bot using **[Railway](https://railway.app/)** or any hosting 
 4. Set the start command:
 
    ```bash
-   python bot.py
+   python bot1.py
    ```
 
 Railway supports free, always-on deployments with an intuitive interface.

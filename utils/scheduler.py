@@ -15,7 +15,7 @@ align_running = False
 cfg = load_config()
 bot = None
 
-ANSWERS_FILE = "storage/standup_answers.json"
+ANSWERS_FILE = "../storage/standup_answers.json"
 
 
 def save_standup_answer(user_id: int, answers: dict, questions_snapshot: dict, tz):

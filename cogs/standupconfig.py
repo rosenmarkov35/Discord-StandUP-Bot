@@ -6,7 +6,7 @@ from discord import app_commands, Interaction, Embed, Color
 from discord.ext import commands
 
 from utils.config_utils import *
-from scheduler import align_and_start_standup, schedule_standup
+from utils.scheduler import align_and_start_standup, schedule_standup
 from utils.utils import user_has_role
 
 cfg = load_config()

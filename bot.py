@@ -1,4 +1,4 @@
-# bot.py
+# bot1.py
 import logging
 import os
 
@@ -7,7 +7,7 @@ from discord.ext import commands
 from dotenv import load_dotenv
 
 from cogs.ticket import TicketActions, load_open_tickets, AssignedTicketActions
-from scheduler import align_and_start_standup, set_bot
+from utils.scheduler import align_and_start_standup, set_bot
 
 load_dotenv()
 
