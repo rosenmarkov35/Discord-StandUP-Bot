@@ -12,6 +12,10 @@ Unauthorized use or redistribution of obfuscated builds without permission is pr
 
 **StandUP** is a powerful Discord bot designed to streamline team check-ins and ticket management within your server. With scheduled standups, role-based access, and a flexible ticketing system, it helps teams stay organized and accountable.
 
+The bot also features multiple tiers which deliver different features such as grouping users and/or teams to separate the standup check-ins schedules at different times with different configurations and more. Other features include further customization of the UI, broader and larger limits for most of the core features.
+
+All production versions/tiers of the project are obfuscated and compiled to prevent sharing or piracy in any way and as a further safety measure an API is used to check unique licenses provided to each instance of the app or its owner ( the client ). The license management can be automated or manual and the keys also have expiry dates and reflect the bot tier. 
+
 ---
 
 ## 📦 Features
@@ -247,4 +251,3 @@ Use the `✏️ Edit Content` button in `/preview` to set:
 ## 🤝 Acknowledgements
 
 * Built with [discord.py](https://github.com/Rapptz/discord.py)
-* Created with ❤️ to support async teams
