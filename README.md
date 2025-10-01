@@ -282,7 +282,7 @@ docker start standup-bot
 
 ## Usage / Demo
 
-
+https://github.com/user-attachments/assets/3c009b95-4ff9-444a-8ce7-50d8ef2cbd40
 
 ## 🎮 Commands Overview
 
