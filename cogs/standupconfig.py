@@ -14,7 +14,7 @@ VALID_DAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday"
 
 
 async def validate_and_handle_toggle(interaction: Interaction, cfg: dict, was_valid_before: bool):
-    # Validate config after the change
+    # Validate config after change
     is_valid, missing = validate_standup_config(cfg)
 
     # If config just became invalid (was valid before, now invalid)
@@ -36,7 +36,6 @@ async def validate_and_handle_toggle(interaction: Interaction, cfg: dict, was_va
 
     # If still invalid but was invalid before, don't spam message
     if not is_valid and not was_valid_before:
-        # optionally do nothing or silently fail
         return
 
 
@@ -237,7 +236,6 @@ class StandupConfig(commands.Cog):
 
     @channel.error
     async def channel_error(self, interaction: Interaction, error: app_commands.AppCommandError):
-        # You can inspect the error type and respond accordingly
         await interaction.response.send_message(
             "❗Something went wrong. Make sure you mention a valid channel like '#general'.",
             ephemeral=True

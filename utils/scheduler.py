@@ -3,6 +3,7 @@ import os
 from datetime import datetime
 
 import discord
+from discord import Embed
 from discord.ext import tasks, commands
 from discord.ui import View, Button, Modal, TextInput
 
@@ -15,7 +16,9 @@ align_running = False
 cfg = load_config()
 bot = None
 
-ANSWERS_FILE = "../storage/standup_answers.json"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # project root
+STORAGE_DIR = os.path.join(BASE_DIR, "storage")
+ANSWERS_FILE = os.path.join(STORAGE_DIR, "standup_answers.json")
 
 
 def save_standup_answer(user_id: int, answers: dict, questions_snapshot: dict, tz):
@@ -23,7 +26,7 @@ def save_standup_answer(user_id: int, answers: dict, questions_snapshot: dict, t
     user_id = str(user_id)
 
     if os.path.exists(ANSWERS_FILE):
-        # If file is empty or corrupt, catch and default to empty dict
+        # If file is empty or corruptdefault to empty dict
         try:
             with open(ANSWERS_FILE, "r", encoding="utf-8") as f:
                 data = json.load(f)
@@ -44,7 +47,7 @@ def save_standup_answer(user_id: int, answers: dict, questions_snapshot: dict, t
     }
 
     if len(data) > 14:
-        oldest_day = sorted(data.keys())[0]  # Ensures lexicographic order
+        oldest_day = sorted(data.keys())[0]  # Ensures order
         data.pop(oldest_day)
 
     # Save back
@@ -108,10 +111,36 @@ class StandupAnswerModal(Modal, title="Standup Answers"):
 
 
 class StandupAnswerView(View):
+    def __init__(self):
+        super().__init__(timeout=3600)  # 1 hour in seconds
+        self.message = None  # set this when sending
+
     @discord.ui.button(label="📝 Answer Standup", style=discord.ButtonStyle.primary)
-    async def answer_standup(self, interaction: discord.Interaction, button: Button):  # USE THIS TO OPEN THE MODAL FOR
+    async def answer_standup(self, interaction: discord.Interaction, button: Button):
         await interaction.response.send_modal(
-            StandupAnswerModal(questions=cfg["standup_questions"], view=self))  # ANSWERING THE QUESTIONS
+            StandupAnswerModal(questions=cfg["standup_questions"], view=self)
+        )
+
+    async def on_timeout(self):
+        """Called automatically when the 1-hour timer ends."""
+        for child in self.children:
+            child.disabled = True  # disable all buttons
+
+        try:
+            if self.message:
+                embeds = self.message.embeds  # current embeds on the message
+                if embeds:
+                    embed = embeds[0]
+                    embed.set_footer(text="⏰ This standup has expired after 1 hour.")
+                    embed.color = discord.Color.red()
+                    embeds[0] = embed
+                    await self.message.edit(embeds=embeds, view=self)
+                else:
+                    # if no embed exists, you can create one
+                    embed = Embed(description="⏰ This standup has expired after 1 hour.")
+                    await self.message.edit(embed=embed, view=self)
+        except discord.NotFound:
+            pass
 
 
 def build_standup_embed():
@@ -154,32 +183,29 @@ async def schedule_standup():
 
     minutes_until = time_until.total_seconds() / 60
 
-    # Send announcement 20 minutes before, only once per day
+    # Send announcement 20 minutes before
     if 19 <= minutes_until <= 20:
         if last_announcement_date != now.date():
             await send_standup_announcement(bot)
             last_announcement_date = now.date()
 
-    # Send standup DMs at standup time (0-1 minute window)
+    # Send standup DMs at standup time
     if now.hour == standup_hour and now.minute == standup_minute:
-        channel = bot.get_channel(cfg["standup_channel_id"])
-        guild = channel.guild
-        role = guild.get_role(cfg["standup_role_id"])
+        today = now.strftime("%A").lower()
+        if today in cfg["standup_days"]:
+            channel = bot.get_channel(cfg["standup_channel_id"])
+            guild = channel.guild
+            role = guild.get_role(cfg["standup_role_id"])
 
-        # fe 2025-07-31 - - 2025-08-07 on this day remove in FIFO order - aka remove 07-31 add 08-07
-        # 01,  02,  03,  04,  05,  06,  07,  08,  09,  10,  11,  12
-        # 31,  28,  31,  30,  31,  30,  31,  31,  30,  31,  30,  31
+            for member in role.members:
+                try:
+                    view = StandupAnswerView()
+                    message = await member.send(embed=build_standup_embed(), view=view)
+                    view.message = message
+                except discord.Forbidden:
+                    print(f"❌ - Could not DM {member.name}")
 
-        for member in role.members:
-            try:
-                view = StandupAnswerView()
-                message = await member.send(embed=build_standup_embed(), view=view)
-                view.message = message
-            except discord.Forbidden:
-                print(f"❌ - Could not DM {member.name}")
-
-        # Reset announcement flag for next cycle
-        last_announcement_date = None
+            last_announcement_date = None
 
 
 async def align_and_start_standup():

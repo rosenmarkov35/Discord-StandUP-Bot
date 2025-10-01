@@ -81,7 +81,6 @@ class CommentModal(ui.Modal, title="💬 Edit Comments"):
         self.ticket = ticket
         self.message_callback = message_callback
 
-        # Extract plain comment lines (remove mentions if any)
         existing_comments = "\n".join(
             line.split("**: ", 1)[-1] if "**: " in line else line
             for line in ticket.get("updates", [])
@@ -371,7 +370,6 @@ class Ticket(Cog):
             return
 
         try:
-            # Store the ID in config (assuming global `cfg` dict and `save_config_changes()` exist)
             if "tickets_channel_id" not in cfg:
                 cfg["tickets_channel_id"] = None
             cfg["tickets_channel_id"] = channel.id

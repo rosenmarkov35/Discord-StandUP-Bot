@@ -24,13 +24,13 @@ class StandupPaginator(View):
     def update_button_states(self):
         current_date = self.dates[self.day_index]
         total_entries = len(self.data.get(current_date, {}))
-        total_pages = max(1, -(-total_entries // self.entries_per_page))  # Ceiling division
+        total_pages = max(1, -(-total_entries // self.entries_per_page))
 
-        # Day navigation
+        # Day nav
         self.previous_day_button.disabled = self.day_index == 0
         self.next_day_button.disabled = self.day_index >= len(self.dates) - 1
 
-        # Entry pagination
+        # Entries
         self.previous_page_button.disabled = self.page_index == 0
         self.next_page_button.disabled = self.page_index >= total_pages - 1
 
@@ -120,18 +120,17 @@ class Summary(commands.Cog):
 
         all_dates = sorted(data.keys())
 
-        # Determine which dates to show
         selected_dates = []
 
         if input:
             try:
-                # Try to parse as specific date
+                # Try parse as specific date
                 input_date = datetime.strptime(input, "%Y-%m-%d").strftime("%Y-%m-%d")
                 if input_date in data:
                     selected_dates = [input_date]
             except ValueError:
                 try:
-                    # Try to parse as number of entries
+                    # Try parse as number of entries
                     num_entries = min(int(input), 14)
                     selected_dates = all_dates[-num_entries:]
                 except ValueError:
@@ -141,7 +140,7 @@ class Summary(commands.Cog):
                     )
                     return
         else:
-            selected_dates = all_dates[-1:]  # default: last available date
+            selected_dates = all_dates[-1:]
 
         if not selected_dates:
             await interaction.response.send_message("No matching standup entries found.", ephemeral=True)

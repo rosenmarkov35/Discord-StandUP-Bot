@@ -119,7 +119,7 @@ class Preview(commands.Cog):
 
         embed = build_preview_embed()
 
-        # Append warning to the footer if the config is incomplete
+        # Append warning to footer if the config is incomplete
         if not is_valid:
             missing_fields = ", ".join(missing)
             warning_footer = f"⚠️ Missing required content: {missing_fields}"

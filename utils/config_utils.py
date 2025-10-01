@@ -2,7 +2,7 @@
 import json
 
 CONFIG_FILE = "storage/standup_profile.json"
-_cfg_cache = None  # Use an internal cache for performance and consistency
+_cfg_cache = None
 
 
 def validate_standup_config(cfg):
@@ -55,7 +55,7 @@ def load_config():
     return _cfg_cache
 
 
-def save_config_changes(cfg_data):  # <--- Accepts cfg_data as an argument
+def save_config_changes(cfg_data):
     global _cfg_cache
     _cfg_cache = cfg_data  # Update the internal cache with the data being saved
     with open(CONFIG_FILE, "w") as f:
