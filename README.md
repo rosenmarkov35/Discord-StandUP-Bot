@@ -1,13 +1,3 @@
-# ⚠️ Disclaimer
-
-This repository is a public showcase of the project structure and non-sensitive code.
-
-The production version of this bot is **obfuscated using PyArmor** to protect critical logic and enforce licensing. This public version is intended for demonstration and portfolio purposes only.
-
-Unauthorized use or redistribution of obfuscated builds without permission is prohibited.
-
----
-
 # 🛠️ StandUP Bot
 
 **StandUP** is a powerful Discord bot designed to streamline team check-ins and ticket management within your server. With scheduled standups, role-based access, and a flexible ticketing system, it helps teams stay organized and accountable.
@@ -94,9 +84,11 @@ To self-host and run StandUP Bot, you’ll first need to create a bot on the [Di
 
 ### 3. Set Bot Permissions (OAuth2)
 
-Use the **OAuth2 URL Generator** with the following:
+Go to the **`OAuth2`** section on the sidebar.
 
-* **Scopes**: `bot`
+Scroll down and under "**OAuth2 URL Generator**" select only the **`bot`** checkbox/scope in the right column.
+
+Then scroll down to "**Bot Permissions**" and check the following permissions:
 * **Bot Permissions**:
 
   * Manage Roles
@@ -113,62 +105,191 @@ Use the **OAuth2 URL Generator** with the following:
   * Use External Emojis
   * Add Reactions
 
-Invite your bot to the server using the generated link.
+Again scroll down and select "**Guild Install**" and copy the generated URL below.
 
+> ✅ **Now you can open the URL and using your Discord profile, invite the newly created Bot/Application to your server.**
 ---
 
-## 🎠 Running the Bot Locally
+# 🛠 Standup Bot – Installation & Hosting Guide
 
-### Requirements
+This section explains how to run the Standup Bot either on your own computer or using a hosting service like DigitalOcean. The bot is distributed as a public Docker image.
 
-* Python 3.9+
-* `discord.py` library
 
-### Install Dependencies
+## ⚙️ Option A – Self-Hosting (Your Computer)
+
+> How to open the terminal/cmd on your system:  \
+> \
+> **Windows** - Press `Windows + R`, type "cmd", and press Enter to open Command Prompt.  \
+> \
+> **Linux** - Press `Ctrl + Alt + T` to open Terminal.  \
+\
+> **Mac** - Press `Command + Space`, type "Terminal", and press Enter.
+
+
+### Step 1 – Install Docker
+
+**Windows**
+
+1. Download Docker Desktop: [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/)
+2. Install and open Docker Desktop.
+3. Make sure it says "Docker Engine is running".
+
+**Mac**
+
+1. Download Docker Desktop for Mac: [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/)
+2. Install and open Docker Desktop.
+3. Ensure Docker is running.
+
+**Linux (Ubuntu/Debian)**
 
 ```bash
-pip install -r requirements.txt
+sudo apt update
+sudo apt install docker.io -y
+sudo systemctl enable docker
+sudo systemctl start docker
 ```
 
-### Environment Setup
-
-Create a `.env` file in the project root:
-
-```env
-DISCORD_TOKEN=your_token_here
-```
-
-Add any other variables if used.
-
-### Run the Bot
+Check Docker:
 
 ```bash
-python bot1.py
+docker --version
+```
+
+### Step 2 – Pull the Bot Image Locally
+
+```bash
+docker pull kuzeiburqta/standup-bot:latest
+```
+
+
+### Step 3 – Run the Bot Locally
+
+```bash
+docker run -d --name standup-bot
+  -e DISCORD_TOKEN=<your_discord_bot_token>
+  -e LICENSE=<your_license>
+  --restart unless-stopped
+  kuzeiburqta/standup-bot:latest
+```
+> Write this command in the console on one line and replace **`<your_discord_bot_token>`** with the token you created at [https://discord.com/developers/applications](https://discord.com/developers/applications/) and **`<your_license>`** with the license you have been given.
+
+### Step 4 – Check if it’s Running
+
+```bash
+docker ps
+docker logs -f standup-bot
+```
+
+Seeing these messages means the bot successfully connected to Discord and is running as expected.
+
+```bash
+INFO:__main__:Starting bot...
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: <hidden>)
+```
+
+**Stop the bot:**
+
+```bash
+docker stop standup-bot
+```
+
+**Start the bot again:**
+
+```bash
+docker start standup-bot
 ```
 
 ---
 
-## 🎞️ Hosting Guide (Railway or Alternatives)
+## ☁️ Option B – Hosting with DigitalOcean (Recommended for 24/7 Uptime)
 
-You can deploy the bot using **[Railway](https://railway.app/)** or any hosting provider that supports Python apps.
+### How It Works
 
-### Railway Setup (Recommended)
+* You rent a VPS (Droplet) – a computer in the cloud.
+* It runs 24/7 without needing your PC on.
+* You connect via SSH.
+* You install Docker on it and run the bot exactly as above.
 
-1. Create an account at [railway.app](https://railway.app/)
-2. Create a new project and link your GitHub repo or upload the code manually
-3. Set environment variables (e.g. `DISCORD_TOKEN`)
-4. Set the start command:
+### Step 1 – Create a Droplet (Server)
 
-   ```bash
-   python bot1.py
-   ```
+1. Go to [https://digitalocean.com](https://digitalocean.com).
+2. Create an account (payment info required – billed hourly, around \$4–5/month).
+3. Create a Droplet:
 
-Railway supports free, always-on deployments with an intuitive interface.
+   * OS: Ubuntu latest version
+   * Plan: Regular CPU (\$4/month is fine)
+   * Datacenter: Nearest to you
+   * Authentication: SSH key or password (simpler)
+   * Hostname: Set your hostname to whatever you want
+4. Click **Create Droplet**.
+5. Once your droplet is live, click on it and open the **`Console`** in the top right or click **`Launch Droplet Console`**. 
+
+
+### Step 2 – Install Docker on the Server
+
+In the console write these lines one by one.
+```bash
+sudo apt update
+sudo apt install docker.io -y
+sudo systemctl enable docker
+sudo systemctl start docker
+```
+
+Check:
+
+```bash
+docker --version
+```
+
+### Step 3 – Pull the Bot Image on the Server
+
+```bash
+docker pull kuzeiburqta/standup-bot:latest
+```
+
+### Step 4 – Run the Bot on the Server
+
+```bash
+docker run -d --name standup-bot
+  -e DISCORD_TOKEN=<your_discord_bot_token>
+  -e LICENSE=<your_license>
+  --restart unless-stopped
+  kuzeiburqta/standup-bot:latest
+```
+> Write this command in the console on one line and replace **`<your_discord_bot_token>`** with the token you created at [https://discord.com/developers/applications](https://discord.com/developers/applications/) and **`<your_license>`** with the license you have been given.
+
+> ⁉️ If you try pasting in the console normally - `Ctrl+V` it won't work instead use `Ctrl+Shift+V`
+
+### Step 5 – Check If It’s Running
+
+```bash
+docker ps
+docker logs -f standup-bot
+```
+
+**Stop:**
+
+```bash
+docker stop standup-bot
+```
+
+**Start:**
+
+```bash
+docker start standup-bot
+```
+
+✅ That’s it! With DigitalOcean, the bot stays online 24/7 until you stop it.
 
 ---
+
+## Usage / Demo
+
+
 
 ## 🎮 Commands Overview
-#### Examples of the commands in action are shown below.
+
 
 ### 🌟 Standup Commands
 
@@ -200,7 +321,7 @@ Railway supports free, always-on deployments with an intuitive interface.
 /announce      Manually announce the next standup  
 
 ```
-![img_3.png](img_3.png)
+
 ### 📝 Content Configuration
 
 Use the `✏️ Edit Content` button in `/preview` to set:
@@ -227,7 +348,7 @@ Use the `✏️ Edit Content` button in `/preview` to set:
 
 ## ⚠️ Limitations
 
-* Max 60 open tickets allowed concurrently.
+* Max 60 open tickets allowed concurrently. (T1)
 * Discord rate limits may delay message sending during bursts.
 * Proper role and channel names are required for full functionality.
 
