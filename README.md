@@ -179,12 +179,6 @@ Railway supports free, always-on deployments with an intuitive interface.
 /summary       View recorded standup responses  
 ```
 
---- 
-
-![img.png](img.png)
-![img_1.png](img_1.png)
-![img_2.png](img_2.png)
-
 ### 🕒 Schedule Setup
 
 ```
